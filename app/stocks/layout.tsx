@@ -1,11 +1,18 @@
 "use client";
 import { ThemeProvider } from "styled-components";
 import "../globals.css";
-import { Banner, Container, SpaceFill } from "./layoutStyles";
 import { theme } from "../theme";
-import background from "@/public/login-background.jpg";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  BalanceContainer,
+  BalanceTitle,
+  BalanceValue,
+  ChildrenContainer,
+  ChildrenWrapper,
+  Container,
+} from "./layoutStyles";
+import { Header } from "../components/organisms";
 
 export default function AuthLayout({
   children,
@@ -15,9 +22,16 @@ export default function AuthLayout({
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        {children}
-        <Banner $imgURL={background.src}>&nbsp;</Banner>
-        <SpaceFill />
+        <Header />
+        <ChildrenWrapper>
+          <ChildrenContainer>{children}</ChildrenContainer>
+        </ChildrenWrapper>
+
+        <BalanceContainer>
+          <BalanceTitle>Saldo</BalanceTitle>
+          <BalanceValue>R$ 10.000</BalanceValue>
+        </BalanceContainer>
+
         <ToastContainer
           position="bottom-center"
           autoClose={5000}

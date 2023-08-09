@@ -13,9 +13,12 @@ body {
 
 body {
   color: white;
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+      to bottom,
       transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 a {
@@ -29,6 +32,19 @@ a {
   }
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: rgba(238, 238, 238, 0.377);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::selection {
+  background: #46a955;
+  color: white;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -36,5 +52,25 @@ a {
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes appear {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes appearLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
   }
 }

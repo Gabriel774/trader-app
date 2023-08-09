@@ -21,9 +21,13 @@ export const theme = {
   backgroundColor000: "#141414",
   backgroundColor100: "#1D1D1D",
   backgroundColor200: "#272727", // base
+  backgroundColor250: "#2E2E2E",
   backgroundColor300: "#444444",
+  backgroundColor350: "#555555",
   backgroundColor400: "#9A9A9A",
   backgroundColor500: "#D4D4D4",
+  backgroundColorTransparent: "rgba(210,210,210,0.31)",
+  backgroundColorTransparentDark: "rgba(34,34,34,0.51)",
 
   error: "#DC3545",
   errorLight: "#ff7d7a",

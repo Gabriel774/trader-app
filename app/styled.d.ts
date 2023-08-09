@@ -22,9 +22,12 @@ declare module "styled-components" {
     backgroundColor000: string;
     backgroundColor100: string;
     backgroundColor200: string;
+    backgroundColor250: string;
     backgroundColor300: string;
+    backgroundColor350: string;
     backgroundColor400: string;
     backgroundColor500: string;
+    backgroundColorTransparent: string;
 
     error: string;
     errorLight: string;
