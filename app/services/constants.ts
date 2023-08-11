@@ -1,1 +1,1 @@
-export const ApiURL = "http://localhost:3333/";
+export const ApiURL = "https://trader-api.vercel.app/";
