@@ -10,7 +10,7 @@
           {
             "ssr": true,
             "displayName": true,
-            "preprocess": false
+            "preprocess": true
           }
         ],
         ["styled-components", { "ssr": true }]
@@ -23,7 +23,7 @@
           {
             "ssr": true,
             "displayName": true,
-            "preprocess": false
+            "preprocess": true
           }
         ],
         ["styled-components", { "ssr": true }]
@@ -44,7 +44,7 @@
       {
         "ssr": true,
         "displayName": true,
-        "preprocess": false
+        "preprocess": true
       }
     ],
     ["styled-components", { "ssr": true }]
