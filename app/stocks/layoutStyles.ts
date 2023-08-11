@@ -109,7 +109,7 @@ export const Card = styled.div<CardProps>`
   min-height: 114px;
   position: relative;
   overflow: hidden;
-  animation: appearLeft 0.${(props) => props.$delay}s;
+  animation: appearLeft ${(props) => props.$delay}s;
 
   @media (max-width: 500px) {
     flex-direction: column;

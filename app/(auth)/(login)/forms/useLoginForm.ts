@@ -6,9 +6,12 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import * as yup from "yup";
+import { fetchUserData } from "@/app/helpers/fetchUserData";
+import { useRouter } from "next/navigation";
 
 export default function useLoginForm() {
   const [loading, setLoading] = useState(false);
+  const { push } = useRouter();
 
   const form = useFormik({
     initialValues: {
@@ -37,7 +40,11 @@ export default function useLoginForm() {
         Cookies.set("auth_token", res.data.access_token, { expires: 2 });
         store.dispatch(setAuthToken(res.data.access_token));
 
+        fetchUserData(res.data.access_token);
+
         toast.success("Logado com sucesso!");
+
+        push("/stocks/buy");
       } catch (err: any) {
         console.log(err);
         toast.error("Oops, Credenciais inválidas");

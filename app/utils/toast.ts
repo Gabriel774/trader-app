@@ -1,6 +1,5 @@
 import { ToastOptions, toast as toastify } from "react-toastify";
 import { theme } from "../theme";
-import { IconType } from "react-icons";
 
 const config: ToastOptions<{}> = {
   position: "bottom-center",

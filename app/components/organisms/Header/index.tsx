@@ -14,10 +14,11 @@ import logo from "@/public/logo.png";
 import { usePathname } from "next/navigation";
 import { ProfilePic } from "../../atoms";
 import userPlaceHolder from "@/public/user.png";
-import { navLinks } from "@/app/constants";
+import { image_url_prefix, navLinks } from "@/app/constants";
 import { AiOutlineMenu } from "react-icons/ai";
+import { UserStateProps } from "@/app/store/user";
 
-export default function Header() {
+export default function Header({ state }: { state: UserStateProps }) {
   const pathName = usePathname();
 
   return (
@@ -32,19 +33,26 @@ export default function Header() {
               $active={pathName === link.href}
               href={link.href}
             >
-              <link.icon fontSize={30} />
+              <link.icon fontSize={25} />
               <HeaderText>{link.title}</HeaderText>
             </HeaderLink>
           ))}
         </LinkContainer>
 
         <ProfileContainer>
-          <ProfilePic $size={40} $image={userPlaceHolder.src} />
-          <Username>Usuário</Username>
+          <ProfilePic
+            $size={40}
+            $image={
+              state?.profile_pic
+                ? image_url_prefix + state.profile_pic
+                : userPlaceHolder.src
+            }
+          />
+          <Username>{state?.name}</Username>
         </ProfileContainer>
 
         <MenuIconContainer>
-          <AiOutlineMenu font-size={30} />
+          <AiOutlineMenu fontSize={30} />
         </MenuIconContainer>
       </Container>
     </Wrapper>

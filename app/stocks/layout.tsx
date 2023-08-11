@@ -13,23 +13,36 @@ import {
   Container,
 } from "./layoutStyles";
 import { Header } from "../components/organisms";
+import store from "../store";
+import { useEffect, useState } from "react";
+import { fetchUserData } from "../helpers/fetchUserData";
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [state, setState] = useState<any>(store.getState());
+
+  useEffect(() => {
+    fetchUserData(state.user.auth_token!);
+  }, []);
+
+  store.subscribe(() => {
+    setState(store.getState().user);
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Header />
+        <Header state={state} />
         <ChildrenWrapper>
           <ChildrenContainer>{children}</ChildrenContainer>
         </ChildrenWrapper>
 
         <BalanceContainer>
           <BalanceTitle>Saldo</BalanceTitle>
-          <BalanceValue>R$ 10.000</BalanceValue>
+          <BalanceValue>R$ {state?.balance}</BalanceValue>
         </BalanceContainer>
 
         <ToastContainer

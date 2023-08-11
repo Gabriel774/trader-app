@@ -1,6 +1,11 @@
 import { UserService } from "@/app/services";
 import store from "@/app/store";
-import { setAuthToken } from "@/app/store/user/actions";
+import {
+  setAuthToken,
+  setBalance,
+  setName,
+  setProfilePic,
+} from "@/app/store/user/actions";
 import checkFileSize from "@/app/utils/checkFileSize";
 import checkImage from "@/app/utils/checkImage";
 import { toast } from "@/app/utils/toast";
@@ -9,6 +14,7 @@ import { useEffect, useState } from "react";
 import * as yup from "yup";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { fetchUserData } from "@/app/helpers/fetchUserData";
 
 export default function useRegisterForm() {
   const [loading, setLoading] = useState(false);
@@ -70,6 +76,10 @@ export default function useRegisterForm() {
         const login = await service.login(form.values);
         Cookies.set("auth_token", login.data.access_token, { expires: 2 });
         store.dispatch(setAuthToken(login.data.access_token));
+
+        fetchUserData(login.data.access_token);
+
+        push("/stocks/tutorial");
       } catch (err: any) {
         push("/");
         toast.error("Erro ao fazer login");
@@ -78,7 +88,6 @@ export default function useRegisterForm() {
       setLoading(false);
     },
   });
-  console.log(form.values);
 
   useEffect(() => {
     if (checkImage(form.values.profile_pic)) {

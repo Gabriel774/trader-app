@@ -47,6 +47,7 @@ export const HeaderLink = styled(Link)<HeaderLinkProps>`
   overflow: hidden;
   padding: 10px 20px;
   border-radius: 7px;
+  gap: 5px;
   color: ${(props) =>
     props.$active
       ? props.theme.primaryColor400
@@ -65,7 +66,7 @@ export const HeaderText = styled.span`
   transition: all 0.2s;
   white-space: nowrap;
 `;
-
+ 
 export const ProfileContainer = styled.div`
   display: flex;
   gap: 10px;

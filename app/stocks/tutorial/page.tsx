@@ -24,7 +24,7 @@ export default function Tutorial() {
 
       <CardContainer>
         {cards.map((card, i) => (
-          <Card key={i} $delay={i + 5}>
+          <Card key={i} $delay={i / 10 + 0.5}>
             <CardIconContainer>
               <CardIconWrapper>
                 <card.icon fontSize={35} />

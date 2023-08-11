@@ -3,6 +3,7 @@ import { MdOutlineAttachMoney } from "react-icons/md";
 import { BsCashCoin } from "react-icons/bs";
 import { PiSunHorizonThin } from "react-icons/pi";
 import { VscDebugRestart } from "react-icons/vsc";
+import { FaRankingStar } from "react-icons/fa6";
 
 export const cards = [
   {
@@ -31,6 +32,12 @@ export const cards = [
     text: `
         Ao acessar as abas de compra e venda de ações é possível finalizar o dia,
         ao fazer isso os valores das ações serão atualizados.
+      `,
+  },
+  {
+    icon: FaRankingStar,
+    text: `
+        Acessando a aba Ranking é possível ver os jogadores com o maior saldo disponível.
       `,
   },
   {

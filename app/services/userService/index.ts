@@ -18,4 +18,12 @@ export default class UserService extends Service {
       headers: { ["Content-Type"]: "multipart/form-data" },
     });
   }
+
+  async getUserData() {
+    return await this.http.get("auth/me", {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
+  }
 }

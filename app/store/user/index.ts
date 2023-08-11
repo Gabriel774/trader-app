@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
-interface initialStateProps {
+export interface UserStateProps {
   auth_token: string | undefined;
   name: string;
-  profile_pic: string;
+  profile_pic: string | undefined;
   balance: null | number;
 }
 
-const initialState: initialStateProps = {
+const initialState: UserStateProps = {
   auth_token: Cookies.get("auth_token"),
   name: "",
-  profile_pic: "",
+  profile_pic: undefined,
   balance: null,
 };
 
