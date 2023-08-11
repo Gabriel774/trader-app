@@ -4,6 +4,7 @@ import { Libre_Franklin } from "next/font/google";
 const libreFranklin = Libre_Franklin({ subsets: ["latin"], weight: "400" });
 
 import "./globals.css";
+import StyledComponentsRegistry from "./registry";
 
 export const metadata: Metadata = {
   title: "Trader",
@@ -18,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={libreFranklin.className}>{children}</body>
+      <body className={libreFranklin.className}>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
     </html>
   );
 }
