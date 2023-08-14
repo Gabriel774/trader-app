@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import * as yup from "yup";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { fetchUserData } from "@/app/helpers/fetchUserData";
+import { fetchUserData } from "@/app/fetchs/fetchUserData";
 
 export default function useRegisterForm() {
   const [loading, setLoading] = useState(false);

@@ -27,7 +27,7 @@ export const theme = {
   backgroundColor400: "#9A9A9A",
   backgroundColor500: "#D4D4D4",
   backgroundColorTransparent: "rgba(210,210,210,0.31)",
-  backgroundColorTransparentDark: "rgba(34,34,34,0.51)",
+  backgroundColorTransparentDark: "rgba(12,12,12,0.51)",
 
   error: "#DC3545",
   errorLight: "#ff7d7a",

@@ -10,15 +10,22 @@ import {
   Wrapper,
 } from "./styles";
 import logo from "@/public/logo.png";
-
+import Skeleton from "react-loading-skeleton";
 import { usePathname } from "next/navigation";
 import { ProfilePic } from "../../atoms";
 import userPlaceHolder from "@/public/user.png";
 import { image_url_prefix, navLinks } from "@/app/constants";
 import { AiOutlineMenu } from "react-icons/ai";
 import { UserStateProps } from "@/app/store/user";
+import { truncate } from "@/app/utils/truncate";
+import { Dispatch, SetStateAction } from "react";
 
-export default function Header({ state }: { state: UserStateProps }) {
+interface HeaderProps {
+  state: UserStateProps;
+  setModalActive: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Header({ state, setModalActive }: HeaderProps) {
   const pathName = usePathname();
 
   return (
@@ -39,16 +46,25 @@ export default function Header({ state }: { state: UserStateProps }) {
           ))}
         </LinkContainer>
 
-        <ProfileContainer>
-          <ProfilePic
-            $size={40}
-            $image={
-              state?.profile_pic
-                ? image_url_prefix + state.profile_pic
-                : userPlaceHolder.src
-            }
-          />
-          <Username>{state?.name}</Username>
+        <ProfileContainer onClick={() => setModalActive(true)}>
+          {state?.name ? (
+            <>
+              <ProfilePic
+                $size={40}
+                $image={
+                  state?.profile_pic
+                    ? image_url_prefix + state.profile_pic
+                    : userPlaceHolder.src
+                }
+              />
+              <Username>{truncate(state?.name, 16)}</Username>
+            </>
+          ) : (
+            <>
+              <Skeleton circle={true} width={40} height={40} />
+              <Skeleton width={70} height={15} />
+            </>
+          )}
         </ProfileContainer>
 
         <MenuIconContainer>

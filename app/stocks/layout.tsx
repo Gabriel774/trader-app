@@ -12,10 +12,12 @@ import {
   ChildrenWrapper,
   Container,
 } from "./layoutStyles";
-import { Header } from "../components/organisms";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Header, UserMenu } from "../components/organisms";
 import store from "../store";
 import { useEffect, useState } from "react";
-import { fetchUserData } from "../helpers/fetchUserData";
+import { fetchUserData } from "../fetchs/fetchUserData";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function AuthLayout({
   children,
@@ -23,41 +25,54 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   const [state, setState] = useState<any>(store.getState());
+  const [userMenuActive, setUserMenuActive] = useState(true);
 
   useEffect(() => {
     fetchUserData(state.user.auth_token!);
   }, []);
 
   store.subscribe(() => {
-    setState(store.getState().user);
+    setState(store.getState());
   });
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        <Header state={state} />
-        <ChildrenWrapper>
-          <ChildrenContainer>{children}</ChildrenContainer>
-        </ChildrenWrapper>
+      <SkeletonTheme
+        baseColor={theme.secondaryColor200}
+        highlightColor={theme.secondaryColor600}
+      >
+        <Container>
+          <Header setModalActive={setUserMenuActive} state={state.user} />
+          <ChildrenWrapper>
+            <ChildrenContainer>{children}</ChildrenContainer>
+          </ChildrenWrapper>
 
-        <BalanceContainer>
-          <BalanceTitle>Saldo</BalanceTitle>
-          <BalanceValue>R$ {state?.balance}</BalanceValue>
-        </BalanceContainer>
+          <BalanceContainer>
+            <BalanceTitle>Saldo</BalanceTitle>
+            <BalanceValue>
+              R$ {state?.user.balance || <Skeleton width={55} height={15} />}
+            </BalanceValue>
+          </BalanceContainer>
 
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+        </Container>
+        <UserMenu
+          state={state.user}
+          active={userMenuActive}
+          setActive={setUserMenuActive}
         />
-      </Container>
+      </SkeletonTheme>
     </ThemeProvider>
   );
 }

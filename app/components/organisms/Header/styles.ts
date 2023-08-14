@@ -34,7 +34,7 @@ export const LinkContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1150px) {
     display: none;
   }
 `;
@@ -82,7 +82,7 @@ export const ProfileContainer = styled.div`
     background-color: ${(props) => props.theme.backgroundColor350};
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1150px) {
     display: none;
   }
 `;
@@ -103,7 +103,7 @@ export const MenuIconContainer = styled.div`
     background-color: ${(props) => props.theme.backgroundColor350};
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1150px) {
     display: flex;
   }
 `;

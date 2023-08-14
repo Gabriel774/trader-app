@@ -28,6 +28,7 @@ declare module "styled-components" {
     backgroundColor400: string;
     backgroundColor500: string;
     backgroundColorTransparent: string;
+    backgroundColorTransparentDark: string;
 
     error: string;
     errorLight: string;

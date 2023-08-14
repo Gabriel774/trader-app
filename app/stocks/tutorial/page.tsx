@@ -8,7 +8,7 @@ import {
   WelcomeMessageIconContainer,
   CardIconContainer,
   CardText,
-} from "../layoutStyles";
+} from "./styles";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { cards } from "./cards";
 
