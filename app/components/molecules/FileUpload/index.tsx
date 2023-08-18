@@ -6,9 +6,15 @@ interface FileUploadProps {
   id: string;
   styles?: CSSProperties;
   onChange: Function;
+  disabled?: boolean;
 }
 
-export default function FileUpload({ id, styles, onChange }: FileUploadProps) {
+export default function FileUpload({
+  id,
+  styles,
+  onChange,
+  disabled,
+}: FileUploadProps) {
   return (
     <>
       <Label htmlFor={id} style={styles}>
@@ -20,6 +26,7 @@ export default function FileUpload({ id, styles, onChange }: FileUploadProps) {
         onChange={(event) => {
           onChange("profile_pic", event.currentTarget.files![0]);
         }}
+        disabled={disabled}
       />
     </>
   );

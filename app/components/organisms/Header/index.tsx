@@ -18,11 +18,10 @@ import { image_url_prefix, navLinks } from "@/app/constants";
 import { AiOutlineMenu } from "react-icons/ai";
 import { UserStateProps } from "@/app/store/user";
 import { truncate } from "@/app/utils/truncate";
-import { Dispatch, SetStateAction } from "react";
 
 interface HeaderProps {
   state: UserStateProps;
-  setModalActive: Dispatch<SetStateAction<boolean>>;
+  setModalActive: (value: boolean) => void;
 }
 
 export default function Header({ state, setModalActive }: HeaderProps) {

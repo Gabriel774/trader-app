@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 interface LabelProps {
   $active: boolean;
+  $background?: string;
 }
 interface InputProps {
   $paddingRight: number;
@@ -39,7 +40,10 @@ export const Label = styled.span<LabelProps>`
   top: ${(props) => (props.$active ? "-10px" : "13px")};
   left: 13px;
   font-size: ${(props) => (props.$active ? "12px" : "18px")};
-  background: ${(props) => props.theme.backgroundColor200};
+  background-color: ${(props) =>
+    props.$background
+      ? props.theme[props.$background]
+      : props.theme.backgroundColor200};
   padding: 2px;
   user-select: none;
   cursor: text;

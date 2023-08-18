@@ -23,11 +23,14 @@ interface InputProps {
   value: string;
   setValue: (e: ChangeEvent<any>) => void;
   styles?: CSSProperties;
+  containerStyles?: CSSProperties;
   Icon?: IconType;
   password?: boolean;
   showReveal?: boolean;
   id?: string;
   onBlur?: (e: FocusEvent<any, Element>) => void;
+  labelBackground?: string;
+  disabled?: boolean;
 }
 
 export default function Input({
@@ -40,6 +43,9 @@ export default function Input({
   showReveal,
   id,
   onBlur,
+  labelBackground,
+  containerStyles,
+  disabled,
 }: InputProps) {
   const [active, setActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,10 +58,11 @@ export default function Input({
   }, [value]);
 
   return (
-    <InputContainer>
+    <InputContainer style={containerStyles}>
       <InputStyled
         type={inputPassword ? "password" : "text"}
         ref={inputRef}
+        disabled={disabled}
         name={id}
         id={id}
         style={styles}
@@ -68,7 +75,11 @@ export default function Input({
           checkText();
         }}
       />
-      <Label $active={active} onClick={() => inputRef.current!.focus()}>
+      <Label
+        $background={labelBackground}
+        $active={active}
+        onClick={() => inputRef.current!.focus()}
+      >
         {label}
       </Label>
       {Icon && (

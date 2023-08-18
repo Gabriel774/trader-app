@@ -28,6 +28,7 @@ export default function Register() {
         styles={{ width: "100%" }}
         Icon={BiSolidUser}
         onBlur={form.handleBlur}
+        disabled={loading}
       />
       {form.touched.name && form.errors.name && (
         <ErrorMessage>{form.errors.name}</ErrorMessage>
@@ -43,6 +44,7 @@ export default function Register() {
         Icon={BiSolidLock}
         showReveal={true}
         onBlur={form.handleBlur}
+        disabled={loading}
       />
       {form.touched.password && form.errors.password && (
         <ErrorMessage>{form.errors.password}</ErrorMessage>
@@ -57,6 +59,7 @@ export default function Register() {
         password={true}
         Icon={BiSolidLock}
         onBlur={form.handleBlur}
+        disabled={loading}
       />
       {form.touched.password_confirm && form.errors.password_confirm && (
         <ErrorMessage>{form.errors.password_confirm}</ErrorMessage>
@@ -66,6 +69,7 @@ export default function Register() {
         id="profile_pic"
         styles={{ marginTop: 20 }}
         onChange={form.setFieldValue}
+        disabled={loading}
       />
       {form.errors.profile_pic && form.touched.profile_pic && (
         <ErrorMessage>{form.errors.profile_pic}</ErrorMessage>

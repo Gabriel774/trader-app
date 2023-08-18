@@ -25,7 +25,11 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   const [state, setState] = useState<any>(store.getState());
-  const [userMenuActive, setUserMenuActive] = useState(true);
+  const [userMenuActive, setUserMenuActive] = useState(false);
+
+  const changeUserMenuActive = (value: boolean) => {
+    if (state.user.name) setUserMenuActive(value);
+  };
 
   useEffect(() => {
     fetchUserData(state.user.auth_token!);
@@ -42,7 +46,7 @@ export default function AuthLayout({
         highlightColor={theme.secondaryColor600}
       >
         <Container>
-          <Header setModalActive={setUserMenuActive} state={state.user} />
+          <Header setModalActive={changeUserMenuActive} state={state.user} />
           <ChildrenWrapper>
             <ChildrenContainer>{children}</ChildrenContainer>
           </ChildrenWrapper>

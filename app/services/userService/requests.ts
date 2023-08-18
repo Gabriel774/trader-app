@@ -8,3 +8,9 @@ interface RegisterRequest {
   password: string;
   profile_pic?: File | null;
 }
+
+interface UpdateRequest {
+  name: string;
+  password?: string;
+  profile_pic?: File | null;
+}

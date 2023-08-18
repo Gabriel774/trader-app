@@ -1,9 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
-import { Modal, ProfilePic } from "../../atoms";
-import { Container, Username } from "./styles";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Modal } from "../../atoms";
+import {
+  Close,
+  Container,
+  GapIcon,
+  Header,
+  HeaderTitle,
+  Return,
+} from "./styles";
 import { UserStateProps } from "@/app/store/user";
-import { image_url_prefix } from "@/app/constants";
-import userPlaceHolder from "@/public/user.png";
+import Overview from "./overview";
+import EditForm from "./editForm";
 
 interface UserMenuProps {
   state: UserStateProps;
@@ -12,25 +19,63 @@ interface UserMenuProps {
 }
 
 export default function UserMenu({ active, setActive, state }: UserMenuProps) {
+  const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const changeShowForm = (value: boolean) => {
+    if (!loading) setShowForm(value);
+  };
+
+  const changeActive = (value: boolean) => {
+    if (!loading) setActive(value);
+  };
+
+  useEffect(() => {
+    setShowForm(false);
+  }, [active]);
+
   return (
     <Modal
       id="modal"
       $active={active}
       onClick={(e) => {
         const target = e.target as HTMLTextAreaElement;
-        if (target.id === "modal") setActive(!active);
+        if (target.id === "modal") changeActive(false);
       }}
     >
       <Container>
-        <ProfilePic
-          $image={
-            state?.profile_pic
-              ? image_url_prefix + state.profile_pic
-              : userPlaceHolder.src
-          }
-          $size={150}
-        />
-        <Username>{state?.name}</Username>
+        <Header>
+          {showForm ? (
+            <Return
+              onClick={() => {
+                changeShowForm(false);
+              }}
+            />
+          ) : (
+            <GapIcon />
+          )}
+
+          <HeaderTitle>
+            {showForm ? "Editar informações" : "Minhas informações"}
+          </HeaderTitle>
+
+          <Close
+            onClick={() => {
+              changeActive(false);
+            }}
+          />
+        </Header>
+
+        {showForm ? (
+          <EditForm loading={loading} setLoading={setLoading} state={state} />
+        ) : (
+          <Overview
+            setShowForm={changeShowForm}
+            state={state}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        )}
       </Container>
     </Modal>
   );

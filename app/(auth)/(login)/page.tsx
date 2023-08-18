@@ -2,7 +2,6 @@
 import logo from "../../../public/logo.png";
 import { Input } from "../../components/molecules";
 import { BiSolidUser, BiSolidLock, BiLogIn } from "react-icons/bi";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   RegisterMessage,
   RegisterLink,
@@ -27,6 +26,7 @@ export default function Login() {
         styles={{ width: "100%" }}
         onBlur={form.handleBlur}
         Icon={BiSolidUser}
+        disabled={loading}
       />
       {form.touched.name && form.errors.name && (
         <ErrorMessage>{form.errors.name}</ErrorMessage>
@@ -42,6 +42,7 @@ export default function Login() {
         onBlur={form.handleBlur}
         Icon={BiSolidLock}
         showReveal={true}
+        disabled={loading}
       />
       {form.touched.password && form.errors.password && (
         <ErrorMessage>{form.errors.password}</ErrorMessage>

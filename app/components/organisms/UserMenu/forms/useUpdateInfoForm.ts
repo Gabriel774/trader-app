@@ -1,24 +1,31 @@
+import { image_url_prefix } from "@/app/constants";
 import { UserService } from "@/app/services";
 import store from "@/app/store";
-import { setAuthToken } from "@/app/store/user/actions";
+import { UserStateProps } from "@/app/store/user";
+import { setName, setProfilePic } from "@/app/store/user/actions";
 import checkFileSize from "@/app/utils/checkFileSize";
 import checkImage from "@/app/utils/checkImage";
 import { toast } from "@/app/utils/toast";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import { fetchUserData } from "@/app/fetchs/fetchUserData";
 
-export default function useRegisterForm() {
-  const [loading, setLoading] = useState(false);
-  const [preview, setPreview] = useState<null | string>(null);
-  const { push } = useRouter();
+export default function useUpdateInfoForm(
+  state: UserStateProps,
+  loading: boolean,
+  setLoading: (value: boolean) => void
+) {
+  const profile_pic_url = state.profile_pic
+    ? image_url_prefix + state.profile_pic
+    : undefined;
+
+  const [preview, setPreview] = useState<null | string>(
+    profile_pic_url || null
+  );
 
   const form = useFormik({
     initialValues: {
-      name: "",
+      name: state.name,
       password: "",
       password_confirm: "",
       profile_pic: null,
@@ -28,17 +35,28 @@ export default function useRegisterForm() {
         .string()
         .required("Campo obrigatório")
         .min(3, "Nome de usuário muito curto")
-        .max(30, "Nome de usuário muito grande"),
+        .max(50, "Nome de usuário muito grande"),
       password: yup
         .string()
-        .required("Campo obrigatório")
+        .nullable()
         .min(8, "A senha deve ter no mínimo 8 caracteres.")
         .max(30, "Senha muito longa"),
       password_confirm: yup
         .string()
-        .required("Campo obrigatório")
+        .nullable()
         .min(8, "A senha deve ter no mínimo 8 caracteres.")
         .max(30, "Senha muito longa")
+        .test({
+          name: "is-password-set",
+          message: "Confirme a sua senha",
+          params: {},
+          test: (value, context) => {
+            console.log(context.parent);
+            if (context.parent.password)
+              return value !== undefined && context.parent.password;
+            return true;
+          },
+        })
         .oneOf([yup.ref("password")], "Senhas não coincidem"),
       profile_pic: yup
         .mixed()
@@ -54,32 +72,21 @@ export default function useRegisterForm() {
     }),
     onSubmit: async () => {
       if (loading) return;
-
       setLoading(true);
-      const service = new UserService();
+      const service = new UserService(state.auth_token);
 
       try {
-        await service.register(form.values);
-        toast.success("Registrado com sucesso!");
+        const res = await service.update(form.values);
+
+        store.dispatch(setName(res.data.name));
+        if (form.values.profile_pic)
+          store.dispatch(setProfilePic(res.data.profile_pic));
+
+        toast.success("Informações atualizadas com sucesso!");
       } catch (err: any) {
-        console.log(err);
-        if (err.response.status == 409) {
-          return toast.error("Oops, nome de usuário já existe");
-        }
-        toast.error("Oops, houve um erro no cadastro");
-      }
-
-      try {
-        const login = await service.login(form.values);
-        Cookies.set("auth_token", login.data.access_token, { expires: 2 });
-        store.dispatch(setAuthToken(login.data.access_token));
-
-        await fetchUserData(login.data.access_token);
-
-        push("/stocks/tutorial");
-      } catch (err: any) {
-        push("/");
-        toast.error("Erro ao fazer login");
+        if (err.response.status === 400) {
+          toast.error("Oops, nome de usuário já existente");
+        } else toast.error("Oops, houve um erro ao atualizar informações");
       }
 
       setLoading(false);
@@ -97,8 +104,8 @@ export default function useRegisterForm() {
       form.setFieldTouched("profile_pic", true);
     }
 
-    setPreview(null);
+    setPreview(profile_pic_url || null);
   }, [form.values.profile_pic]);
 
-  return { form, loading, preview };
+  return { form, preview };
 }

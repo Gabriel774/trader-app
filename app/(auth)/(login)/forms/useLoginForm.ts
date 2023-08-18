@@ -31,6 +31,8 @@ export default function useLoginForm() {
         .max(30, "Senha muito longa"),
     }),
     onSubmit: async () => {
+      if (loading) return;
+
       setLoading(true);
       const service = new UserService();
 
@@ -40,7 +42,7 @@ export default function useLoginForm() {
         Cookies.set("auth_token", res.data.access_token, { expires: 2 });
         store.dispatch(setAuthToken(res.data.access_token));
 
-        fetchUserData(res.data.access_token);
+        await fetchUserData(res.data.access_token);
 
         toast.success("Logado com sucesso!");
 
