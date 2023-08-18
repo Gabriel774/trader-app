@@ -13,7 +13,7 @@ import {
   Container,
 } from "./layoutStyles";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { Header, UserMenu } from "../components/organisms";
+import { Header, NavMenuMobile, UserMenu } from "../components/organisms";
 import store from "../store";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../fetchs/fetchUserData";
@@ -26,9 +26,14 @@ export default function AuthLayout({
 }) {
   const [state, setState] = useState<any>(store.getState());
   const [userMenuActive, setUserMenuActive] = useState(false);
+  const [navMenuMobileActive, setNavMenuMobileActive] = useState(false);
 
   const changeUserMenuActive = (value: boolean) => {
     if (state.user.name) setUserMenuActive(value);
+  };
+
+  const changeNavMenuMobileActive = (value: boolean) => {
+    if (state.user.name) setNavMenuMobileActive(value);
   };
 
   useEffect(() => {
@@ -46,7 +51,11 @@ export default function AuthLayout({
         highlightColor={theme.secondaryColor600}
       >
         <Container>
-          <Header setModalActive={changeUserMenuActive} state={state.user} />
+          <Header
+            setModalActive={changeUserMenuActive}
+            setNavMenuMobileActive={changeNavMenuMobileActive}
+            state={state.user}
+          />
           <ChildrenWrapper>
             <ChildrenContainer>{children}</ChildrenContainer>
           </ChildrenWrapper>
@@ -75,6 +84,11 @@ export default function AuthLayout({
           state={state.user}
           active={userMenuActive}
           setActive={setUserMenuActive}
+        />
+        <NavMenuMobile
+          active={navMenuMobileActive}
+          setActive={changeNavMenuMobileActive}
+          setUserMenuActive={setUserMenuActive}
         />
       </SkeletonTheme>
     </ThemeProvider>

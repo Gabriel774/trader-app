@@ -2,6 +2,7 @@ import { UserService } from "../services";
 import store from "../store";
 import { setBalance, setName, setProfilePic } from "../store/user/actions";
 import { toast } from "../utils/toast";
+import Cookies from "js-cookie";
 
 export async function fetchUserData(token: string) {
   try {
@@ -15,5 +16,10 @@ export async function fetchUserData(token: string) {
       store.dispatch(setProfilePic(userData.data.profile_pic));
   } catch (err: any) {
     toast.error("Erro ao carregar dados");
+    Cookies.remove("auth_token");
+
+    setTimeout(() => {
+      location.reload();
+    }, 5000);
   }
 }

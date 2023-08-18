@@ -66,7 +66,7 @@ export const HeaderText = styled.span`
   transition: all 0.2s;
   white-space: nowrap;
 `;
- 
+
 export const ProfileContainer = styled.div`
   display: flex;
   gap: 10px;

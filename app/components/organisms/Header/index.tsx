@@ -22,9 +22,14 @@ import { truncate } from "@/app/utils/truncate";
 interface HeaderProps {
   state: UserStateProps;
   setModalActive: (value: boolean) => void;
+  setNavMenuMobileActive: (value: boolean) => void;
 }
 
-export default function Header({ state, setModalActive }: HeaderProps) {
+export default function Header({
+  state,
+  setModalActive,
+  setNavMenuMobileActive,
+}: HeaderProps) {
   const pathName = usePathname();
 
   return (
@@ -66,7 +71,7 @@ export default function Header({ state, setModalActive }: HeaderProps) {
           )}
         </ProfileContainer>
 
-        <MenuIconContainer>
+        <MenuIconContainer onClick={() => setNavMenuMobileActive(true)}>
           <AiOutlineMenu fontSize={30} />
         </MenuIconContainer>
       </Container>
