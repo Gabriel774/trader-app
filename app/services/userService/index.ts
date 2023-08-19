@@ -50,4 +50,12 @@ export default class UserService extends Service {
       },
     });
   }
+
+  async getRanking() {
+    return await this.http.get("users/rank", {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
+  }
 }

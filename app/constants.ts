@@ -1,5 +1,4 @@
 import { BsGraphUp } from "react-icons/bs";
-import { MdOutlineAttachMoney } from "react-icons/md";
 import { BiHelpCircle } from "react-icons/bi";
 import { FaRankingStar } from "react-icons/fa6";
 
@@ -7,12 +6,7 @@ export const navLinks = [
   {
     href: "/stocks/buy",
     icon: BsGraphUp,
-    title: "Comprar Ações",
-  },
-  {
-    href: "/stocks/sell",
-    icon: MdOutlineAttachMoney,
-    title: "Vender ações",
+    title: "Comprar & Vender",
   },
   {
     href: "/stocks/ranking",

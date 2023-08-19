@@ -48,7 +48,6 @@ export default function useLoginForm() {
 
         push("/stocks/buy");
       } catch (err: any) {
-        console.log(err);
         toast.error("Oops, Credenciais inválidas");
       }
 

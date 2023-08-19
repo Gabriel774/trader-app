@@ -62,7 +62,6 @@ export default function useRegisterForm() {
         await service.register(form.values);
         toast.success("Registrado com sucesso!");
       } catch (err: any) {
-        console.log(err);
         if (err.response.status == 409) {
           return toast.error("Oops, nome de usuário já existe");
         }

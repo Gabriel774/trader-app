@@ -1,5 +1,6 @@
 import {
   Container,
+  HeaderItemWrapper,
   HeaderLink,
   HeaderText,
   LinkContainer,
@@ -35,7 +36,9 @@ export default function Header({
   return (
     <Wrapper>
       <Container>
-        <Logo alt="Trader" src={logo} />
+        <HeaderItemWrapper>
+          <Logo alt="Trader" src={logo} />
+        </HeaderItemWrapper>
 
         <LinkContainer>
           {navLinks.map((link) => (
@@ -50,26 +53,28 @@ export default function Header({
           ))}
         </LinkContainer>
 
-        <ProfileContainer onClick={() => setModalActive(true)}>
-          {state?.name ? (
-            <>
-              <ProfilePic
-                $size={40}
-                $image={
-                  state?.profile_pic
-                    ? image_url_prefix + state.profile_pic
-                    : userPlaceHolder.src
-                }
-              />
-              <Username>{truncate(state?.name, 16)}</Username>
-            </>
-          ) : (
-            <>
-              <Skeleton circle={true} width={40} height={40} />
-              <Skeleton width={70} height={15} />
-            </>
-          )}
-        </ProfileContainer>
+        <HeaderItemWrapper style={{ justifyContent: "flex-end" }}>
+          <ProfileContainer onClick={() => setModalActive(true)}>
+            {state?.name ? (
+              <>
+                <ProfilePic
+                  $size={40}
+                  $image={
+                    state?.profile_pic
+                      ? image_url_prefix + state.profile_pic
+                      : userPlaceHolder.src
+                  }
+                />
+                <Username>{truncate(state?.name, 16)}</Username>
+              </>
+            ) : (
+              <>
+                <Skeleton circle={true} width={40} height={40} />
+                <Skeleton width={70} height={15} />
+              </>
+            )}
+          </ProfileContainer>
+        </HeaderItemWrapper>
 
         <MenuIconContainer onClick={() => setNavMenuMobileActive(true)}>
           <AiOutlineMenu fontSize={30} />

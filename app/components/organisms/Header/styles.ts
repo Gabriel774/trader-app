@@ -113,3 +113,8 @@ export const Username = styled.h3`
   font-weight: bold;
   color: ${(props) => props.theme.secondaryColor400};
 `;
+
+export const HeaderItemWrapper = styled.div`
+  display: flex;
+  width: 205px;
+`;

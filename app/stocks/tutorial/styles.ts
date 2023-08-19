@@ -35,10 +35,11 @@ export const Card = styled.div<CardProps>`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.backgroundColor250};
+  color: ${(props) => props.theme.secondaryColor400};
   justify-content: center;
   border-radius: 7px;
-  background-color: ${(props) => props.theme.secondaryColor400};
+  border: 1px solid ${(props) => props.theme.backgroundColor300};
+  background-color: ${(props) => props.theme.backgroundColor250};
   font-size: 18px;
   width: 100%;
   min-height: 114px;

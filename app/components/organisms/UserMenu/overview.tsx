@@ -48,12 +48,9 @@ export default function Overview({
 
         const res = await service.resetUserData();
 
-        console.log(res);
-
         toast.success("Dados resetados com sucesso!");
       } catch (err: any) {
         toast.error("Houve um problema ao resetar os dados.");
-        console.log(err);
       }
 
       setLoading(false);

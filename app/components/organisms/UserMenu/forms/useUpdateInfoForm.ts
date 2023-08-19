@@ -51,7 +51,6 @@ export default function useUpdateInfoForm(
           message: "Confirme a sua senha",
           params: {},
           test: (value, context) => {
-            console.log(context.parent);
             if (context.parent.password)
               return value !== undefined && context.parent.password;
             return true;
