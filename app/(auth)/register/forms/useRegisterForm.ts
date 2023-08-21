@@ -28,7 +28,7 @@ export default function useRegisterForm() {
         .string()
         .required("Campo obrigatório")
         .min(3, "Nome de usuário muito curto")
-        .max(30, "Nome de usuário muito grande"),
+        .max(16, "Nome de usuário muito grande"),
       password: yup
         .string()
         .required("Campo obrigatório")
@@ -61,24 +61,24 @@ export default function useRegisterForm() {
       try {
         await service.register(form.values);
         toast.success("Registrado com sucesso!");
+
+        try {
+          const login = await service.login(form.values);
+          Cookies.set("auth_token", login.data.access_token, { expires: 2 });
+          store.dispatch(setAuthToken(login.data.access_token));
+
+          await fetchUserData(login.data.access_token);
+
+          push("/stocks/tutorial");
+        } catch (err: any) {
+          push("/");
+          toast.error("Erro ao fazer login");
+        }
       } catch (err: any) {
         if (err.response.status == 409) {
           return toast.error("Oops, nome de usuário já existe");
         }
         toast.error("Oops, houve um erro no cadastro");
-      }
-
-      try {
-        const login = await service.login(form.values);
-        Cookies.set("auth_token", login.data.access_token, { expires: 2 });
-        store.dispatch(setAuthToken(login.data.access_token));
-
-        await fetchUserData(login.data.access_token);
-
-        push("/stocks/tutorial");
-      } catch (err: any) {
-        push("/");
-        toast.error("Erro ao fazer login");
       }
 
       setLoading(false);

@@ -23,7 +23,7 @@ export default function useLoginForm() {
         .string()
         .required("Campo obrigatório")
         .min(3, "Nome de usuário muito curto")
-        .max(50, "Nome de usuário muito grande"),
+        .max(16, "Nome de usuário muito grande"),
       password: yup
         .string()
         .required("Campo obrigatório")
