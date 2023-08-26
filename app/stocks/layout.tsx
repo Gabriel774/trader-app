@@ -63,7 +63,10 @@ export default function AuthLayout({
           <BalanceContainer>
             <BalanceTitle>Saldo</BalanceTitle>
             <BalanceValue>
-              R$ {state?.user.balance || <Skeleton width={55} height={15} />}
+              R${" "}
+              {state?.user.balance?.toLocaleString() || (
+                <Skeleton width={55} height={15} />
+              )}
             </BalanceValue>
           </BalanceContainer>
 

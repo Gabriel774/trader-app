@@ -12,6 +12,6 @@ export function middleware(req: NextRequest) {
     (req.nextUrl.pathname == "/" || req.nextUrl.pathname == "/register") &&
     auth_token
   ) {
-    return NextResponse.redirect(new URL("/stocks/buy", req.url));
+    return NextResponse.redirect(new URL("/stocks/trade", req.url));
   }
 }

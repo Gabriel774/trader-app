@@ -4,7 +4,7 @@ import { FaRankingStar } from "react-icons/fa6";
 
 export const navLinks = [
   {
-    href: "/stocks/buy",
+    href: "/stocks/trade",
     icon: BsGraphUp,
     title: "Comprar & Vender",
   },

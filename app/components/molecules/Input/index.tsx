@@ -20,7 +20,7 @@ import { IconType } from "react-icons";
 
 interface InputProps {
   label: string;
-  value: string;
+  value: string | number;
   setValue: (e: ChangeEvent<any>) => void;
   styles?: CSSProperties;
   containerStyles?: CSSProperties;
@@ -31,6 +31,7 @@ interface InputProps {
   onBlur?: (e: FocusEvent<any, Element>) => void;
   labelBackground?: string;
   disabled?: boolean;
+  type?: string;
 }
 
 export default function Input({
@@ -46,6 +47,7 @@ export default function Input({
   labelBackground,
   containerStyles,
   disabled,
+  type,
 }: InputProps) {
   const [active, setActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +62,7 @@ export default function Input({
   return (
     <InputContainer style={containerStyles}>
       <InputStyled
-        type={inputPassword ? "password" : "text"}
+        type={type ? type : inputPassword ? "password" : "text"}
         ref={inputRef}
         disabled={disabled}
         name={id}

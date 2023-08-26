@@ -77,10 +77,10 @@ export default function Ranking() {
           })
         ) : (
           <>
-            {Array(10)
+            {Array(12)
               .fill(true)
-              .map(() => (
-                <Skeleton height={100} />
+              .map((_, i) => (
+                <Skeleton key={i} height={100} />
               ))}
           </>
         )}

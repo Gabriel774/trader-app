@@ -46,7 +46,7 @@ export default function useLoginForm() {
 
         toast.success("Logado com sucesso!");
 
-        push("/stocks/buy");
+        push("/stocks/trade");
       } catch (err: any) {
         toast.error("Oops, Credenciais inválidas");
       }

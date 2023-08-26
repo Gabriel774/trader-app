@@ -16,8 +16,11 @@ export default function AuthLayout({
     <ThemeProvider theme={theme}>
       <Container>
         {children}
+        
         <Banner $imgURL={background.src}>&nbsp;</Banner>
+        
         <SpaceFill />
+        
         <ToastContainer
           position="bottom-center"
           autoClose={5000}

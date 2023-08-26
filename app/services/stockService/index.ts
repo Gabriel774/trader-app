@@ -1,4 +1,5 @@
 import Service from "../service";
+import { UpdateQuantityBody } from "./requests";
 
 export default class StockService extends Service {
   async getStocks() {
@@ -9,5 +10,19 @@ export default class StockService extends Service {
     });
   }
 
-  async updateValues() {}
+  async updateValues() {
+    return await this.http.put("stocks/update-stocks-value", null, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
+  }
+
+  async updateQuantity(data: UpdateQuantityBody) {
+    return await this.http.put("stocks/update-stock-quantity", data, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
+  }
 }

@@ -75,7 +75,7 @@ export default function useRegisterForm() {
           toast.error("Erro ao fazer login");
         }
       } catch (err: any) {
-        if (err.response.status == 409) {
+        if (err.response.status == 409 || err.response.status == 400) {
           return toast.error("Oops, nome de usuário já existe");
         }
         toast.error("Oops, houve um erro no cadastro");

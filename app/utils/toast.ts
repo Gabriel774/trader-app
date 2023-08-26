@@ -15,13 +15,23 @@ export const toast = {
   success: (message: string) => {
     toastify.success(message, {
       ...config,
-      style: { backgroundColor: theme.primaryColor000 },
+      style: {
+        backgroundColor: theme.primaryColor000,
+        maxWidth: "80vw",
+        margin: "auto",
+        marginTop: 10,
+      },
     });
   },
   error: (message: string) => {
     toastify.error(message, {
       ...config,
-      style: { backgroundColor: theme.error },
+      style: {
+        backgroundColor: theme.error,
+        maxWidth: "80vw",
+        margin: "auto",
+        marginTop: 10,
+      },
     });
   },
 };
