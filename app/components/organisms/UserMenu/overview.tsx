@@ -46,9 +46,10 @@ export default function Overview({
       try {
         const service = new UserService(state.auth_token);
 
-        const res = await service.resetUserData();
+        await service.resetUserData();
 
-        toast.success("Dados resetados com sucesso!");
+        toast.success("Dados resetados com sucesso, a página será atualizada.");
+        setTimeout(() => location.reload(), 2500);
       } catch (err: any) {
         toast.error("Houve um problema ao resetar os dados.");
       }

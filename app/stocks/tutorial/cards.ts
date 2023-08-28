@@ -16,34 +16,27 @@ export const cards = [
   {
     icon: MdOutlineAttachMoney,
     text: `
-        Ao clicar na aba Comprar Ações você pode fazer a compra de ações
-        disponíveis no mercado usando seu saldo.
-      `,
-  },
-  {
-    icon: BsCashCoin,
-    text: `
-        Na aba Vender Ações é possível fazer a venda das ações no seu
-        portfólio e aumentar seu saldo.
+        Ao clicar na aba Comprar & Vender você pode fazer a compra de ações
+        disponíveis no mercado usando seu saldo ou vender ações no seu portfólio.
       `,
   },
   {
     icon: PiSunHorizonThin,
     text: `
-        Ao acessar as abas de compra e venda de ações é possível finalizar o dia,
+        Ao acessar a aba de Compra & Venda é possível finalizar o dia,
         ao fazer isso os valores das ações serão atualizados.
       `,
   },
   {
     icon: FaRankingStar,
     text: `
-        Acessando a aba Ranking é possível ver os jogadores com o maior saldo disponível.
+        Acessando a aba Ranking é possível ver uma lista com os jogadores com o maior saldo disponível.
       `,
   },
   {
     icon: VscDebugRestart,
     text: `
-        Você possui o saldo inicial de R$ 10.000, caso você você fique sem
+        Você possui o saldo inicial de R$ 2.500, caso você você fique sem
         saldo é possível resetar o jogo no menu do usuário acessando seu perfil
         pelo menu no topo.
       `,
