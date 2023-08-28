@@ -57,7 +57,7 @@ export default function useTradeState() {
     price,
     type,
   }: TradeStockProps) => {
-    if (!validateTradeStock(quantity, price, ownedQuantity, type)) return;
+    if (!validateTradeStock(quantity, price, ownedQuantity, type)) return false;
 
     const service = new StockService(state.user.auth_token);
 
@@ -77,7 +77,7 @@ export default function useTradeState() {
 
     store.dispatch(setBalance(res.data.new_balance));
 
-    console.log(res);
+    return true;
   };
 
   const updateStocksValue = async () => {
@@ -124,5 +124,6 @@ export default function useTradeState() {
     loading,
     updateStocksValue,
     isUserSet,
+    balance: state.user.balance,
   };
 }

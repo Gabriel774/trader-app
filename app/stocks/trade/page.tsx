@@ -16,6 +16,7 @@ export default function TradeStock() {
     loading,
     updateStocksValue,
     isUserSet,
+    balance,
   } = useTradeState();
 
   return (
@@ -30,7 +31,7 @@ export default function TradeStock() {
       />
 
       <CardContainer>
-        {data() && isUserSet ? (
+        {data() ? (
           data()!
             .filter((stock) =>
               stock.name.toLowerCase().includes(search.toLowerCase())
@@ -41,6 +42,7 @@ export default function TradeStock() {
                 loading={loading}
                 tradeStock={tradeStock}
                 key={stock.id}
+                balance={balance!}
               />
             ))
         ) : (

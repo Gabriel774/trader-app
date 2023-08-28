@@ -1,6 +1,5 @@
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MdOutlineAttachMoney } from "react-icons/md";
-import { BsCashCoin } from "react-icons/bs";
 import { PiSunHorizonThin } from "react-icons/pi";
 import { VscDebugRestart } from "react-icons/vsc";
 import { FaRankingStar } from "react-icons/fa6";
@@ -36,7 +35,7 @@ export const cards = [
   {
     icon: VscDebugRestart,
     text: `
-        Você possui o saldo inicial de R$ 2.500, caso você você fique sem
+        Você possui o saldo inicial de R$ 2.500, caso você fique sem
         saldo é possível resetar o jogo no menu do usuário acessando seu perfil
         pelo menu no topo.
       `,

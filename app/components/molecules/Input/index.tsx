@@ -24,6 +24,7 @@ interface InputProps {
   setValue: (e: ChangeEvent<any>) => void;
   styles?: CSSProperties;
   containerStyles?: CSSProperties;
+  labelStyles?: CSSProperties;
   Icon?: IconType;
   password?: boolean;
   showReveal?: boolean;
@@ -46,6 +47,7 @@ export default function Input({
   onBlur,
   labelBackground,
   containerStyles,
+  labelStyles,
   disabled,
   type,
 }: InputProps) {
@@ -79,6 +81,7 @@ export default function Input({
       />
       <Label
         $background={labelBackground}
+        style={labelStyles}
         $active={active}
         onClick={() => inputRef.current!.focus()}
       >

@@ -1,5 +1,6 @@
 import { Button, Loading, ProfilePic } from "@/app/components/atoms";
 import {
+  CardActionsContainer,
   CardBody,
   CardCompanyContainer,
   CardHeader,
@@ -7,6 +8,8 @@ import {
   CardPriceText,
   CardQuantityRow,
   CardTitle,
+  CompanyPic,
+  CompanyStockPrice,
   Card as Container,
 } from "./styles";
 import { Input } from "@/app/components/molecules";
@@ -15,7 +18,12 @@ import { image_url_prefix } from "@/app/constants";
 import Skeleton from "react-loading-skeleton";
 import { CardProps, TransactionProps } from "./interfaces";
 
-export default function Card({ data, tradeStock, loading }: CardProps) {
+export default function Card({
+  data,
+  tradeStock,
+  loading,
+  balance,
+}: CardProps) {
   const [quantity, setQuantity] = useState<string | number>("");
   const [loadingTransaction, setLoadingTransaction] = useState<
     "sell" | "buy" | null
@@ -34,7 +42,9 @@ export default function Card({ data, tradeStock, loading }: CardProps) {
     if (loading || loadingTransaction) return;
     setLoadingTransaction(type);
 
-    await tradeStock(data);
+    const res = await tradeStock(data);
+
+    if (res) setQuantity("");
 
     setLoadingTransaction(null);
   };
@@ -43,27 +53,25 @@ export default function Card({ data, tradeStock, loading }: CardProps) {
     <Container>
       <CardHeader>
         <CardCompanyContainer>
-          <ProfilePic
-            $image={image_url_prefix + data.company_logo}
-            $size={55}
-          />
+          <CompanyPic>
+            <ProfilePic
+              $image={image_url_prefix + data.company_logo}
+              $size={35}
+            />
+          </CompanyPic>
+          <CardTitle>{data.name}</CardTitle>
         </CardCompanyContainer>
-        <CardTitle>{data.name}</CardTitle>
+        <CompanyStockPrice>
+          R${" "}
+          {!loading ? (
+            data.UserStocks[0].value.toLocaleString()
+          ) : (
+            <Skeleton height={18} width={40} />
+          )}
+        </CompanyStockPrice>
       </CardHeader>
 
       <CardBody>
-        <CardPriceRow>
-          <CardPriceText>Valor da ação</CardPriceText>
-
-          <CardPriceText>
-            R${" "}
-            {!loading ? (
-              data.UserStocks[0].value.toLocaleString()
-            ) : (
-              <Skeleton height={18} width={40} />
-            )}
-          </CardPriceText>
-        </CardPriceRow>{" "}
         <CardPriceRow>
           <CardPriceText>Estoque</CardPriceText>
 
@@ -81,6 +89,8 @@ export default function Card({ data, tradeStock, loading }: CardProps) {
             setValue={(e) => changeQuantity(e.currentTarget.value)}
             value={quantity}
             containerStyles={{ marginTop: 0, width: "100%" }}
+            styles={{ fontSize: 15 }}
+            labelStyles={{ fontSize: 15 }}
             labelBackground="backgroundColor250"
             onBlur={(e) => blur(e)}
             disabled={loading}
@@ -114,56 +124,66 @@ export default function Card({ data, tradeStock, loading }: CardProps) {
             +
           </Button>
         </CardQuantityRow>
-        <Button
-          $background="primaryColor100"
-          $text="secondaryColor500"
-          onClick={() => {
-            transaction({
-              data: {
-                userStockId: data.UserStocks[0].id,
-                quantity: Number(quantity),
-                ownedQuantity: data.UserStocks[0].quantity,
-                price: data.UserStocks[0].value,
-                type: true,
-              },
-              type: "buy",
-            });
-          }}
-        >
-          {loadingTransaction === "buy" ? (
-            <>
-              <span>Carregando</span>
-              <Loading size={20} color="secondaryColor400" />
-            </>
-          ) : (
-            "Comprar"
-          )}
-        </Button>
-        <Button
-          $background="secondaryColor500"
-          $text="backgroundColor300"
-          onClick={() =>
-            transaction({
-              data: {
-                userStockId: data.UserStocks[0].id,
-                quantity: Number(quantity),
-                ownedQuantity: data.UserStocks[0].quantity,
-                price: data.UserStocks[0].value,
-                type: false,
-              },
-              type: "sell",
-            })
-          }
-        >
-          {loadingTransaction === "sell" ? (
-            <>
-              <span>Carregando</span>
-              <Loading size={20} color="backgroundColor300" />
-            </>
-          ) : (
-            "Vender"
-          )}
-        </Button>
+        <CardActionsContainer>
+          <Button
+            $background="secondaryColor500"
+            $text="backgroundColor300"
+            style={{
+              fontSize: 15,
+              flex: 1,
+            }}
+            onClick={() =>
+              transaction({
+                data: {
+                  userStockId: data.UserStocks[0].id,
+                  quantity: Number(quantity),
+                  ownedQuantity: data.UserStocks[0].quantity,
+                  price: data.UserStocks[0].value,
+                  type: false,
+                },
+                type: "sell",
+              })
+            }
+          >
+            {loadingTransaction === "sell" ? (
+              <>
+                <span>Carregando</span>
+                <Loading size={20} color="backgroundColor300" />
+              </>
+            ) : (
+              "Vender"
+            )}
+          </Button>
+          <Button
+            $background="primaryColor100"
+            $text="secondaryColor500"
+            style={{
+              fontSize: 15,
+              flex: 1,
+            }}
+            onClick={() => {
+              transaction({
+                data: {
+                  userStockId: data.UserStocks[0].id,
+                  quantity: Number(quantity),
+                  ownedQuantity: data.UserStocks[0].quantity,
+                  price: data.UserStocks[0].value,
+                  type: true,
+                },
+                type: "buy",
+              });
+            }}
+          >
+            {loadingTransaction === "buy" ? (
+              <>
+                <span>Carregando</span>
+                <Loading size={20} color="secondaryColor400" />
+              </>
+            ) : (
+              "Comprar"
+            )}
+          </Button>
+        </CardActionsContainer>
       </CardBody>
     </Container>
   );

@@ -51,6 +51,7 @@ export interface CardProps {
     ownedQuantity,
     price,
     type,
-  }: TradeStockProps) => Promise<void>;
+  }: TradeStockProps) => Promise<boolean>;
   loading: boolean;
+  balance: number;
 }

@@ -12,6 +12,7 @@ export const ChildrenWrapper = styled.div`
   justify-content: center;
   height: calc(100vh - 75px);
   overflow-y: auto;
+  position: relative;
 `;
 
 export const ChildrenContainer = styled.div`

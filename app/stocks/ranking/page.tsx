@@ -68,7 +68,7 @@ export default function Ranking() {
                   <CardTextContainer>
                     <CardUsername>{user.name}</CardUsername>
                     <CardBalance>
-                      R$ {truncate(user.balance.toString(), 16)}
+                      R$ {truncate(user.balance.toLocaleString(), 16)}
                     </CardBalance>
                   </CardTextContainer>
                 </CardUserInfo>
