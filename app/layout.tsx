@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Libre_Franklin } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
 
 const libreFranklin = Libre_Franklin({ subsets: ["latin"], weight: "400" });
 
@@ -22,7 +21,6 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={libreFranklin.className}>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        <Analytics />
       </body>
     </html>
   );
