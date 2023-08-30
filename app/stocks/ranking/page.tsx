@@ -1,17 +1,17 @@
 "use client";
 import { ProfilePic } from "@/app/components/atoms";
 import {
-  Card,
-  CardBalance,
-  CardContainer,
-  CardProfilePicWrapper,
-  CardRank,
-  CardTextContainer,
-  CardUserInfo,
-  CardUsername,
-  Container,
-  Title,
-} from "./styles";
+  CardRanking,
+  CardRankingBalance,
+  CardRankingContainer,
+  CardRankingProfilePicWrapper,
+  CardRankingNumber,
+  CardRankingTextContainer,
+  CardRankingUserInfo,
+  CardRankingUsername,
+  RankingMainContainer,
+  RankingTitle,
+} from "../layoutStyles";
 import { FaRankingStar } from "react-icons/fa6";
 import userPlaceHolder from "@/public/user.png";
 import { truncate } from "@/app/utils/truncate";
@@ -43,21 +43,21 @@ export default function Ranking() {
   };
 
   return (
-    <Container>
-      <Title>
+    <RankingMainContainer>
+      <RankingTitle>
         <FaRankingStar fontSize={35} />
         <span>Ranking de usuários com maior saldo</span>
-      </Title>
+      </RankingTitle>
 
-      <CardContainer>
+      <CardRankingContainer>
         {data ? (
           data.map((user, i) => {
             return (
-              <Card $delay={(i + 1) / 10 + 0.39} key={i}>
-                <CardRank>{i + 1}</CardRank>
+              <CardRanking $delay={(i + 1) / 10 + 0.39} key={i}>
+                <CardRankingNumber>{i + 1}</CardRankingNumber>
 
-                <CardUserInfo>
-                  <CardProfilePicWrapper>
+                <CardRankingUserInfo>
+                  <CardRankingProfilePicWrapper>
                     <ProfilePic
                       $image={
                         user.profile_pic
@@ -66,17 +66,17 @@ export default function Ranking() {
                       }
                       $size={70}
                     />
-                  </CardProfilePicWrapper>
+                  </CardRankingProfilePicWrapper>
 
-                  <CardTextContainer>
-                    <CardUsername>{user.name}</CardUsername>
+                  <CardRankingTextContainer>
+                    <CardRankingUsername>{user.name}</CardRankingUsername>
 
-                    <CardBalance>
+                    <CardRankingBalance>
                       R$ {truncate(user.balance.toLocaleString(), 16)}
-                    </CardBalance>
-                  </CardTextContainer>
-                </CardUserInfo>
-              </Card>
+                    </CardRankingBalance>
+                  </CardRankingTextContainer>
+                </CardRankingUserInfo>
+              </CardRanking>
             );
           })
         ) : (
@@ -88,7 +88,7 @@ export default function Ranking() {
               ))}
           </>
         )}
-      </CardContainer>
-    </Container>
+      </CardRankingContainer>
+    </RankingMainContainer>
   );
 }

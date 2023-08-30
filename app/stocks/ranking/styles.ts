@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 
-interface CardProps {
+interface CardRankingProps {
   $delay: number;
 }
 
-export const Title = styled.h1`
+export const RankingTitle = styled.h1`
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@ export const Title = styled.h1`
   }
 `;
 
-export const Container = styled.div`
+export const RankingMainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +32,7 @@ export const Container = styled.div`
   gap: 30px;
 `;
 
-export const CardContainer = styled.div`
+export const CardRankingContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
@@ -48,7 +48,7 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const Card = styled.div<CardProps>`
+export const CardRanking = styled.div<CardRankingProps>`
   display: flex;
   border-radius: 7px;
   overflow: hidden;
@@ -56,7 +56,7 @@ export const Card = styled.div<CardProps>`
   animation: appearLeft ${(props) => props.$delay}s;
 `;
 
-export const CardRank = styled.span`
+export const CardRankingNumber = styled.span`
   height: 100%;
   background-color: ${(props) => props.theme.primaryColor100};
   display: flex;
@@ -67,7 +67,7 @@ export const CardRank = styled.span`
   min-width: 50px;
 `;
 
-export const CardUserInfo = styled.div`
+export const CardRankingUserInfo = styled.div`
   display: flex;
   align-items: center;
   padding: 15px;
@@ -82,7 +82,7 @@ export const CardUserInfo = styled.div`
   }
 `;
 
-export const CardUsername = styled.h4`
+export const CardRankingUsername = styled.h4`
   font-size: 22px;
 
   @media (max-width: 360px) {
@@ -92,7 +92,7 @@ export const CardUsername = styled.h4`
   }
 `;
 
-export const CardBalance = styled.h5`
+export const CardRankingBalance = styled.h5`
   font-size: 16px;
   line-break: none;
   white-space: nowrap;
@@ -103,12 +103,12 @@ export const CardBalance = styled.h5`
   }
 `;
 
-export const CardProfilePicWrapper = styled.span`
+export const CardRankingProfilePicWrapper = styled.span`
   width: 70px;
   height: 70px;
 `;
 
-export const CardTextContainer = styled.div`
+export const CardRankingTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
