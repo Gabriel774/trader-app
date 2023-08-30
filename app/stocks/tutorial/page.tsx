@@ -30,6 +30,7 @@ export default function Tutorial() {
                 <card.icon fontSize={35} />
               </CardIconWrapper>
             </CardIconContainer>
+
             <CardText>{card.text}</CardText>
           </Card>
         ))}

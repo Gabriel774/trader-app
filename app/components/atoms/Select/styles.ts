@@ -1,5 +1,5 @@
+import { theme } from "@/app/theme";
 import { CSSObjectWithLabel } from "react-select";
-import { theme } from "../theme";
 
 const selectStyles = {
   control: (baseStyles: CSSObjectWithLabel) => ({

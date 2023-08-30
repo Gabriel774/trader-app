@@ -48,12 +48,14 @@ export default function Ranking() {
         <FaRankingStar fontSize={35} />
         <span>Ranking de usuários com maior saldo</span>
       </Title>
+
       <CardContainer>
         {data ? (
           data.map((user, i) => {
             return (
               <Card $delay={(i + 1) / 10 + 0.39} key={i}>
                 <CardRank>{i + 1}</CardRank>
+
                 <CardUserInfo>
                   <CardProfilePicWrapper>
                     <ProfilePic
@@ -65,8 +67,10 @@ export default function Ranking() {
                       $size={70}
                     />
                   </CardProfilePicWrapper>
+
                   <CardTextContainer>
                     <CardUsername>{user.name}</CardUsername>
+
                     <CardBalance>
                       R$ {truncate(user.balance.toLocaleString(), 16)}
                     </CardBalance>

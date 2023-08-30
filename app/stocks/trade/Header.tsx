@@ -1,10 +1,8 @@
-import { Button, Loading } from "@/app/components/atoms";
+import { Button, Loading, Select } from "@/app/components/atoms";
 import { HeaderContainer, HeaderRow } from "./styles";
 import { Input } from "@/app/components/molecules";
-import Select from "react-select";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Dispatch, SetStateAction, useState } from "react";
-import selectStyles from "@/app/utils/selectStyles";
 
 const sortOptions = [
   { value: "highestPrice", label: "Maior valor" },
@@ -14,7 +12,6 @@ const sortOptions = [
 interface HeaderProps {
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
-  sortBy: "highestPrice" | "lowestPrice" | "default";
   setSortBy: Dispatch<
     SetStateAction<"highestPrice" | "lowestPrice" | "default">
   >;
@@ -26,7 +23,6 @@ export default function Header({
   search,
   setSearch,
   setSortBy,
-  sortBy,
   loading,
   updateStocksValue,
 }: HeaderProps) {
@@ -53,15 +49,9 @@ export default function Header({
 
       <HeaderRow>
         <Select
-          isSearchable={false}
-          styles={selectStyles}
-          options={sortOptions}
-          placeholder="Ordenar por"
-          isClearable={true}
-          onChange={(option: any) =>
-            setSortBy(option ? option.value : "default")
-          }
-          isDisabled={loading}
+          loading={loading}
+          setSortBy={setSortBy}
+          sortOptions={sortOptions}
         />
 
         <Button

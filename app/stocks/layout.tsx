@@ -56,12 +56,14 @@ export default function AuthLayout({
             setNavMenuMobileActive={changeNavMenuMobileActive}
             state={state.user}
           />
+
           <ChildrenWrapper>
             <ChildrenContainer>{children}</ChildrenContainer>
           </ChildrenWrapper>
 
           <BalanceContainer>
             <BalanceTitle>Saldo</BalanceTitle>
+
             <BalanceValue>
               R${" "}
               {state?.user.balance?.toLocaleString() || (
@@ -83,11 +85,13 @@ export default function AuthLayout({
             theme="colored"
           />
         </Container>
+
         <UserMenu
           state={state.user}
           active={userMenuActive}
           setActive={setUserMenuActive}
         />
+
         <NavMenuMobile
           active={navMenuMobileActive}
           setActive={changeNavMenuMobileActive}

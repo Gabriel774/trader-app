@@ -12,17 +12,14 @@ export default function TradeStock() {
     setSearch,
     tradeStock,
     setSortBy,
-    sortBy,
     loading,
     updateStocksValue,
-    isUserSet,
     balance,
   } = useTradeState();
 
   return (
     <Container>
       <Header
-        sortBy={sortBy}
         setSortBy={setSortBy}
         search={search}
         setSearch={setSearch}

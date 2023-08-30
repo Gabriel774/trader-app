@@ -12,6 +12,7 @@ export async function fetchUserData(token: string) {
 
     store.dispatch(setName(userData.data.name));
     store.dispatch(setBalance(userData.data.balance));
+
     if (userData.data.profile_pic)
       store.dispatch(setProfilePic(userData.data.profile_pic));
   } catch (err: any) {

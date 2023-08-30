@@ -18,12 +18,7 @@ import { image_url_prefix } from "@/app/constants";
 import Skeleton from "react-loading-skeleton";
 import { CardProps, TransactionProps } from "./interfaces";
 
-export default function Card({
-  data,
-  tradeStock,
-  loading,
-  balance,
-}: CardProps) {
+export default function Card({ data, tradeStock, loading }: CardProps) {
   const [quantity, setQuantity] = useState<string | number>("");
   const [loadingTransaction, setLoadingTransaction] = useState<
     "sell" | "buy" | null
@@ -59,8 +54,10 @@ export default function Card({
               $size={35}
             />
           </CompanyPic>
+
           <CardTitle>{data.name}</CardTitle>
         </CardCompanyContainer>
+
         <CompanyStockPrice>
           R${" "}
           {!loading ? (
@@ -83,6 +80,7 @@ export default function Card({
             )}
           </CardPriceText>
         </CardPriceRow>
+
         <CardQuantityRow>
           <Input
             label="Quantidade"
@@ -124,6 +122,7 @@ export default function Card({
             +
           </Button>
         </CardQuantityRow>
+
         <CardActionsContainer>
           <Button
             $background="secondaryColor500"
@@ -154,6 +153,7 @@ export default function Card({
               "Vender"
             )}
           </Button>
+
           <Button
             $background="primaryColor100"
             $text="secondaryColor500"

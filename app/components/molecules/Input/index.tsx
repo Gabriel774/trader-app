@@ -79,6 +79,7 @@ export default function Input({
           checkText();
         }}
       />
+
       <Label
         $background={labelBackground}
         style={labelStyles}
@@ -87,6 +88,7 @@ export default function Input({
       >
         {label}
       </Label>
+
       {Icon && (
         <IconContainer
           $active={active}
@@ -95,6 +97,7 @@ export default function Input({
           <Icon fontSize={18} />
         </IconContainer>
       )}
+
       {password && showReveal && (
         <CheckBoxContainer onClick={() => setInputPassword(!inputPassword)}>
           <CheckBox readOnly checked={!inputPassword} type="checkbox" />

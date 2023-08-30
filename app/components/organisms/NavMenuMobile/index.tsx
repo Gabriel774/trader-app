@@ -48,6 +48,7 @@ export default function NavMenuMobile({
             }}
           />
         </Header>
+
         <LinkContainer>
           {navLinks.map((link) => (
             <NavLink
@@ -62,6 +63,7 @@ export default function NavMenuMobile({
               <LinkTitle>{link.title}</LinkTitle>
             </NavLink>
           ))}
+
           <NavLink
             $active={false}
             href="#"
