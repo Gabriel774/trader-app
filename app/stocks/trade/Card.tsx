@@ -11,7 +11,7 @@ import {
   CompanyPic,
   CompanyStockPrice,
   Card as Container,
-} from "./styles";
+} from "../layoutStyles";
 import { Input } from "@/app/components/molecules";
 import { FocusEvent, useState } from "react";
 import { image_url_prefix } from "@/app/constants";
